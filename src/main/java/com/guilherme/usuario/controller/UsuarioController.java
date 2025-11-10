@@ -1,6 +1,8 @@
 package com.guilherme.usuario.controller;
 
 import com.guilherme.usuario.business.UsuarioService;
+import com.guilherme.usuario.business.dto.EnderecoDTO;
+import com.guilherme.usuario.business.dto.TelefoneDTO;
 import com.guilherme.usuario.business.dto.UsuarioDTO;
 import com.guilherme.usuario.infrastructure.entity.Usuario;
 import com.guilherme.usuario.infrastructure.security.JwtUtil;
@@ -35,7 +37,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Usuario> buscarUsuarioPorEmail(@RequestParam("email") String email) {
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorEmail(@RequestParam("email") String email) {
         return ResponseEntity.ok(usuarioService.buscarUsuarioPorEmail(email));
     }
 
@@ -52,4 +54,15 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioService.atualizaDadosUsuario(token, dto));
     }
 
+    @PutMapping("/endereco")
+    public ResponseEntity<EnderecoDTO> atualizaEndereco(@RequestBody EnderecoDTO dto,
+                                                        @RequestParam("id") Long id){
+        return ResponseEntity.ok(usuarioService.atualizaEndereco(id, dto));
+    }
+
+    @PutMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> atualizaTelefone(@RequestBody TelefoneDTO dto,
+                                                        @RequestParam("id") Long id) {
+        return ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
+    }
 }
