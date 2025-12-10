@@ -7,7 +7,7 @@ import com.guilherme.usuario.business.dto.UsuarioDTO;
 import com.guilherme.usuario.infrastructure.entity.Endereco;
 import com.guilherme.usuario.infrastructure.entity.Telefone;
 import com.guilherme.usuario.infrastructure.entity.Usuario;
-import com.guilherme.usuario.infrastructure.exceptions.ConflictExceptions;
+import com.guilherme.usuario.infrastructure.exceptions.ConflictException;
 import com.guilherme.usuario.infrastructure.exceptions.ResourceNotFoundException;
 import com.guilherme.usuario.infrastructure.repository.EnderecoRepository;
 import com.guilherme.usuario.infrastructure.repository.TelefoneRepository;
@@ -38,7 +38,7 @@ public class UsuarioService {
 
     public void emailExiste(String email) {
         if (verificaEmailExistente(email)) {
-            throw new ConflictExceptions("Email já cadastrado: " + email);
+            throw new ConflictException("Email já cadastrado: " + email);
         }
     }
 
